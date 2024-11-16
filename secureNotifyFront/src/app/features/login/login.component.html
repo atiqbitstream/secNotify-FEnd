@@ -1,0 +1,24 @@
+
+<form [formGroup]="loginForm" (ngSubmit)="handleSubmit()">
+  <label>Please Enter Your username</label><br />
+  <input type="text" formControlName="username" required /><br /><br />
+  <div *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+    <div *ngIf="username?.hasError('required')">username is required</div>
+    <div *ngIf="username?.hasError('minlength')">
+      username must be at least 5 characters long.
+    </div>
+  </div>
+  <label>Please Enter Your Password</label><br />
+  <input type="password" formControlName="password" /><br /><br />
+  <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+    <div *ngIf="password?.hasError('required')">password is required.</div>
+    <div *ngIf="password?.hasError('minlength')">
+      password must be at least 7 characters long.
+    </div>
+    <div *ngIf="password?.hasError('pattern')">
+      password should at least contain One upper alphabet, one lower alphabet
+      and one symbol and one numeric value.
+    </div>
+  </div>
+  <button type="submit" [disabled]="loginForm.invalid">Submit</button>
+</form>
